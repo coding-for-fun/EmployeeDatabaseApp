@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+}
+
+tr.mat-row, tr.mat-footer-row{
+  background-color: purple;
+}
+
+tr.mat-header-row{
+  background-color: darkblue
+}
+
+.example-form-field {
+  width: 200px;
+}
+input { color: darkblue !important; } 

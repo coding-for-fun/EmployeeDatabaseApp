@@ -1,0 +1,43 @@
+<mat-progress-spinner *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner>
+<!-- 
+<mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>Enter Employee Id</mat-label>
+    <input matInput type="text" [(ngModel)]="userId">
+    <button *ngIf="userId" matSuffix mat-icon-button aria-label="Clear" (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field> -->
+
+<div *ngIf="success && userListData.length>0">
+    <table mat-table [dataSource]="userListData" class="mat-elevation-z8">
+
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>  Id </th>
+            <td mat-cell *matCellDef="let element" (onClick)="gotoUser(element.id)"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- First Name Column -->
+        <ng-container matColumnDef="first-name">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.first_name}}  </td>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="last-name">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnVal"></tr>
+        <tr mat-row (click)="gotoUser(row)" *matRowDef="let row; columns: columnVal;"></tr>
+    </table>
+</div>
+
+<div *ngIf="!isLoading && !success">No Data</div>
