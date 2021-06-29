@@ -8,6 +8,7 @@ export class DataService {
 
   userListData: UserList[] = [];
   userDetailData: UserDetail;
+  inputFields;
 
   constructor() { }
 
@@ -35,6 +36,14 @@ export class DataService {
     }
   }
 
+  setInputFields(fields){
+    this.inputFields = fields;
+  }
+
+  clearUserListData(){
+    this.userListData = [];
+  }
+
   getUserListData() {
     return this.userListData;
   }
@@ -43,4 +52,7 @@ export class DataService {
     return this.userDetailData;
   }
 
+  getInputFields(){
+    return this.inputFields;
+  }
 }

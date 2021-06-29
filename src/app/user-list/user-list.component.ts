@@ -13,10 +13,18 @@ export class UserListComponent implements OnInit {
 
   success: boolean;
   isLoading: boolean;
+  noData: boolean;
 
   columnVal: string[] = ['id', 'first-name', 'last-name', 'email'];
   userListData: UserList[];
   userId: number;
+
+  inputFields = {
+    empId: undefined,
+    firstName: '',
+    lastName: '',
+    email: ''
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -26,22 +34,25 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let inputFields = this.userDataService.getInputFields();
     let users = this.userDataService.getUserListData();
-    console.log('user list data =' , users)
-    if(users && users.length > 0){
+    console.log('user list data =', users)
+    if (inputFields && users && users.length > 0) {
       this.userListData = users;
       this.success = true;
-      this.isLoading  = false;
-    } else {
-      this.search();
-    }
+      this.isLoading = false;
+      this.inputFields = inputFields;
+    } 
   }
 
-  search(){
+  search() {
     this.isLoading = true;
-    this.apiService.getUserList().subscribe((data) => {
+    this.noData = false;
+    this.userDataService.clearUserListData();
+    this.userDataService.setInputFields(this.inputFields);
+    this.apiService.getUserList(this.inputFields).subscribe((data) => {
       this.userDataService.setUserListData(data);
-      this.displayCityList();
+      this.displayUserList();
       this.success = true;
       this.isLoading = false;
     },
@@ -52,14 +63,17 @@ export class UserListComponent implements OnInit {
       })
   }
 
-  displayCityList() {
+  displayUserList() {
     this.userListData = this.userDataService.getUserListData();
+    if(this.userListData.length<=0){
+      this.noData = true;
+    }
   }
 
   gotoUser(selectedRow) {
     const userId = selectedRow ? selectedRow.id : null;
-    userId ? this.router.navigate(['/employee', userId ]) : console.log('error in user selected');
-    
+    userId ? this.router.navigate(['/employee', userId]) : console.log('error in user selected');
+
   }
 
 }

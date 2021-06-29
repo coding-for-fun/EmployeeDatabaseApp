@@ -14,8 +14,9 @@ export class ApiService {
 
   constructor(private http: HttpClient, private dataService: DataService) { }
 
-  getUserList(id?) {
-    return this.http.get(`${this.baseUrl}contacts`).pipe(map(
+  getUserList(d?) {
+    let url = (d.empId && d.email) ? `email=${d.email}&id=${d.empId}` : d.empId ? `id=${d.empId}`: `email=${d.email}`
+    return this.http.get(`${this.baseUrl}contacts?${url}`).pipe(map(
       data => data,
       error => throwError(error)
     ))
@@ -28,4 +29,5 @@ export class ApiService {
       error => throwError(error)
     ))
   }
+
 }

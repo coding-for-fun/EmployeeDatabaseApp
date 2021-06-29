@@ -10,7 +10,46 @@ tr.mat-header-row{
   background-color: darkblue
 }
 
-.example-form-field {
-  width: 200px;
+form {
+  width: 100%;
+  }
+
+.ff{
+  margin-right: 10px;
+  margin-top: 10px;
 }
-input { color: darkblue !important; } 
+
+.mt-10{
+  margin-top: 10px;
+}
+
+.mat-raised-button.mat-button-disabled:not([class*=mat-elevation-z]) {
+  color: gray;
+   box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 0px 0px 0px rgb(0 0 0 / 12%); 
+}
+
+/* input color class */
+::ng-deep input.mat-input-element {
+  color: #484a4c;
+}
+/* input color class */
+::ng-deep input.mat-input-element {
+  color: #484a4c;
+}
+
+/* Change label color on focused */
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: violet !important;
+}
+
+/* underline border color on focused */
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+  background-color: violet !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label{
+  color: violet !important;
+}
+::ng-deep .mat-form-field-underline{
+  background-color: violet !important;
+}
